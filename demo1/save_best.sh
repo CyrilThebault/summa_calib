@@ -1,5 +1,5 @@
 #!/bin/bash
-# Save use-specifed files every time a best paraemter set is discovered.
+# Save use-specifed files every time a best parameter set is discovered.
 
 # -----------------------------------------------------------------------------------------
 # ----------------------------- User specified input --------------------------------------
@@ -103,6 +103,8 @@ cp $route_outputPath/${summa_outFilePrefix}.mizuRoute.nc $outDir/
 cp $stat_output $outDir/
 cp $calib_path/Ost*.txt $outDir/
 cp $calib_path/timetrack.log $outDir/
+
+python ../scripts/stopping_criteria.py $control_file 
 
 exit 0
 
