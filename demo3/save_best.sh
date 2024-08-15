@@ -104,7 +104,12 @@ cp $stat_output $outDir/
 cp $calib_path/Ost*.txt $outDir/
 cp $calib_path/timetrack.log $outDir/
 
-python ../scripts/stopping_criteria.py $control_file 
+# Run stopping_criteria.py script if specified in the control file
+stopping_criteria="$(read_from_control $control_file "stopping_criteria")"
+
+if [ "$stopping_criteria" = "true" ]; then
+    python ../scripts/stopping_criteria.py $control_file
+fi
 
 exit 0
 
