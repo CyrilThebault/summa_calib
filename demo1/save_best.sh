@@ -104,9 +104,13 @@ cp $stat_output $outDir/
 cp $calib_path/Ost*.txt $outDir/
 cp $calib_path/timetrack.log $outDir/
 
-# Run stopping_criteria.py script if specified in the control file
+# Read stopping_criteria condition from control_file.
 stopping_criteria="$(read_from_control $control_file "stopping_criteria")"
 
+# Convert to lowercase and remove spaces
+stopping_criteria=$(echo "$stopping_criteria" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
+
+# Run stopping_criteria.py script if specified in the control file
 if [ "$stopping_criteria" = "true" ]; then
     python ../scripts/stopping_criteria.py $control_file
 fi
